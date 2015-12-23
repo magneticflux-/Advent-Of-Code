@@ -40,12 +40,7 @@ public class Problem2 {
         names.add("Me");
 
         List<List<String>> permutations = AdventUtils.permute(new ArrayList<>(names));
-        List<String> max = permutations.parallelStream().max(new Comparator<List<String>>() {
-            @Override
-            public int compare(List<String> o1, List<String> o2) {
-                return getScore(o1, changes).compareTo(getScore(o2, changes));
-            }
-        }).get();
+        List<String> max = permutations.parallelStream().max((o1, o2) -> getScore(o1, changes).compareTo(getScore(o2, changes))).get();
         System.out.println(max + " " + getScore(max, changes));
     }
 }
