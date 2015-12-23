@@ -1,12 +1,13 @@
 package day9;
 
+import utils.AdventUtils;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static day9.Problem1.permute;
 
 /**
  * Created by Mitchell on 12/19/2015.
@@ -32,7 +33,7 @@ public class Problem2 {
         //System.out.println(routes);
         //System.out.println(locations);
 
-        List<List<String>> possiblePaths = permute(new ArrayList<>(locations), 0);
+        List<List<String>> possiblePaths = AdventUtils.permute(new ArrayList<>(locations), 0);
         //System.out.println(possiblePaths.size());
 
         Stream<TotalRoute> totalRoutes = possiblePaths.parallelStream().map(strings1 -> {

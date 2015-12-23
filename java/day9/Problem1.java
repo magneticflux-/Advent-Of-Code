@@ -1,5 +1,7 @@
 package day9;
 
+import utils.AdventUtils;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.*;
@@ -30,7 +32,7 @@ public class Problem1 {
         //System.out.println(routes);
         //System.out.println(locations);
 
-        List<List<String>> possiblePaths = permute(new ArrayList<>(locations), 0);
+        List<List<String>> possiblePaths = AdventUtils.permute(new ArrayList<>(locations), 0);
         //System.out.println(possiblePaths.size());
 
         Stream<TotalRoute> totalRoutes = possiblePaths.parallelStream().map(strings1 -> {
@@ -59,19 +61,6 @@ public class Problem1 {
         out.delete(out.length() - 4, out.length());
         out.append(" takes ").append(min.length).append(" units.");
         System.out.println(out);
-    }
-
-    public static <E> List<List<E>> permute(List<E> arr, int k) {
-        List<List<E>> permutations = new ArrayList<>();
-        for (int i = k; i < arr.size(); i++) {
-            Collections.swap(arr, i, k);
-            permutations.addAll(permute(arr, k + 1));
-            Collections.swap(arr, k, i);
-        }
-        if (k == arr.size() - 1) {
-            permutations.add(new ArrayList<>(arr));
-        }
-        return permutations;
     }
 }
 
