@@ -29,22 +29,22 @@ public class Problem2 {
 
         System.out.println(sumOfNumbers(o));
         // STILL BROKEN WHYYYYYY
+        // nvm I used a set instead of a list lol
     }
 
     public static int sumOfNumbers(JsonElement object) {
         int sum = 0;
-        boolean ignoreRed = object.isJsonArray();
         assert object.isJsonArray() == !object.isJsonObject();
 
         Iterable<JsonElement> elements = null;
         if (object.isJsonObject())
-            elements = ((JsonObject) object).entrySet().stream().map(Map.Entry::getValue).collect(Collectors.toSet());
+            elements = ((JsonObject) object).entrySet().stream().map(Map.Entry::getValue).collect(Collectors.toList());
         else if (object.isJsonArray())
             elements = ((JsonArray) object);
         else
             throw new AssertionError("why tho");
 
-        if (!ignoreRed)
+        if (object.isJsonObject()) // Don't fail on red for Arrays
             for (JsonElement element : elements) {
                 if (element.isJsonPrimitive()) {
                     if (element.getAsString().equals("red")) {
@@ -63,6 +63,7 @@ public class Problem2 {
                 try {
                     sum += Integer.parseInt(element.getAsString());
                 } catch (NumberFormatException ignored) {
+                    System.out.println("Could not parse " + element);
                 }
             }
         }
