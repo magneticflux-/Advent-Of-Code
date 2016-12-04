@@ -10,7 +10,7 @@ import java.util.List;
  */
 public class AdventUtils {
     public static void main(String[] args) {
-        System.out.println(permute(Arrays.asList("a", "b", "c")));
+        permute(Arrays.asList("a", "b", "c")).forEach(System.out::println);
     }
 
     public static <E> List<List<E>> permute(List<E> arr) {
