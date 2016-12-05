@@ -48,6 +48,6 @@ public class Problem1 {
             }
             sb.append(keypad[2 - yCoordinate][xCoordinate]);
         }
-        System.out.println(sb);
+        System.out.println("Day 1 Problem 1: " + sb);
     }
 }

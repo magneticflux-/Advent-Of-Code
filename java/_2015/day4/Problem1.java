@@ -1,18 +1,16 @@
 package _2015.day4;
 
-import java.io.FileNotFoundException;
+import javax.xml.bind.DatatypeConverter;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Iterator;
 import java.util.Scanner;
 
-import javax.xml.bind.DatatypeConverter;
-
 /**
  * Created by skaggsm on 12/18/15.
  */
 public class Problem1 {
-    public static void main(String[] args) throws FileNotFoundException, NoSuchAlgorithmException, InterruptedException {
+    public static void main(String[] args) throws NoSuchAlgorithmException {
         Iterator<String> input = new Scanner(Problem1.class.getResourceAsStream("day4.txt"));
         String s = input.next();
 

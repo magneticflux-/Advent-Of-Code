@@ -28,10 +28,10 @@ public class Problem2 {
             if ((t.getLeft() + t.getMiddle() > t.getRight())
                     && (t.getLeft() + t.getRight() > t.getMiddle())
                     && (t.getMiddle() + t.getRight() > t.getLeft())) {
-                System.out.println("Possible Triangle: " + t);
+                //System.out.println("Possible Triangle: " + t);
                 count++;
-            } else
-                System.out.println("Impossible Triangle: " + t);
+            } //else
+            //System.out.println("Impossible Triangle: " + t);
         }
         System.out.println("Day 3 Problem 2: " + count);
     }

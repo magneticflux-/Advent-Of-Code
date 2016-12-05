@@ -54,10 +54,10 @@ public class Problem2 {
                             xCoordinate++;
                         break;
                 }
-                System.out.println(xCoordinate + ", " + yCoordinate + " = " + keypad[keypad.length - 1 - yCoordinate][xCoordinate]);
+                //System.out.println(xCoordinate + ", " + yCoordinate + " = " + keypad[keypad.length - 1 - yCoordinate][xCoordinate]);
             }
             sb.append(keypad[keypad.length - 1 - yCoordinate][xCoordinate]);
         }
-        System.out.println(sb);
+        System.out.println("Day 1 Problem 1: " + sb);
     }
 }
