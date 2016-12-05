@@ -1,7 +1,11 @@
 package _2015.day3;
 
 import java.io.FileNotFoundException;
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Scanner;
 
 /**
  * Created by skaggsm on 12/18/15.
