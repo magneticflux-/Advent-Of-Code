@@ -1,6 +1,8 @@
 package com.github.magneticflux.aoc.day2
 
+import com.github.magneticflux.aoc.combinations
 import com.github.magneticflux.aoc.input
+import com.github.magneticflux.aoc.toSortedPair
 import java.util.*
 
 /**
@@ -12,19 +14,14 @@ object Problem2 {
         val input = Scanner(input())
         input.useDelimiter("\n")
         val grid = input.asSequence().map { it.split('\t').map { it.toInt() } }.toList()
-        println(grid.map {
-            var first: Int? = null
-            var second: Int? = null
 
-            it.forEach { a ->
-                it.forEach { b ->
-                    if (a % b == 0 && a != b) {
-                        first = a
-                        second = b
-                    }
-                }
+        val checksum = grid.map { row ->
+            val divisible = row.combinations(2).map { it.toSortedPair() }.first {
+                return@first it.larger % it.smaller == 0
             }
-            first!! / second!!
-        }.sum())
+            return@map divisible.larger / divisible.smaller
+        }.sum()
+
+        println(checksum)
     }
 }
