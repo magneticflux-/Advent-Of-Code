@@ -11,7 +11,12 @@ fun Any.example(index: Int? = null): InputStream {
     return this::class.java.getResourceAsStream("example${index?.toString() ?: ""}.txt")
 }
 
-fun <T> List<T>.combinations(k: Int = this.size): Sequence<List<T>> {
+/**
+ * Implemented around midnight using my own algorithm. It was probably discovered a few hundred years ago, but I'm stubborn.
+ *
+ * @author Mitchell Skaggs
+ */
+fun <T> List<T>.combinations(k: Int): Sequence<List<T>> {
     return when {
         k > size || k < 0 -> emptySequence()
         k == 0 -> sequenceOf(listOf())
@@ -43,6 +48,71 @@ fun <T> List<T>.combinations(k: Int = this.size): Sequence<List<T>> {
             }
         }.asSequence()
     }
+}
+
+/**
+ * Adapted from [A Simple, Efficient P(n,k) Algorithm](https://alistairisrael.wordpress.com/2009/09/22/simple-efficient-pnk-algorithm/)
+ *
+ * @author Mitchell Skaggs
+ */
+fun <T> List<T>.permutations(k: Int = this.size): Sequence<List<T>> {
+    return when {
+        k > size || k < 0 -> emptySequence()
+        k == 0 -> sequenceOf(emptyList())
+        else -> object : Iterator<List<T>> {
+            val mainIndices = (0..this@permutations.lastIndex).toMutableList()
+            var hasNext = true
+
+            override fun hasNext(): Boolean {
+                return hasNext
+            }
+
+            override fun next(): List<T> {
+                val toReturn = mainIndices.take(k).map { this@permutations[it] }
+
+                var edgeIndex = k - 1
+                var nextLargestIndex = k
+                // find smallest nextLargestIndex > k - 1 where mainIndices[nextLargestIndex] > mainIndices[k - 1]
+                while (nextLargestIndex < this@permutations.size && mainIndices[edgeIndex] >= mainIndices[nextLargestIndex]) {
+                    nextLargestIndex++
+                }
+
+                if (nextLargestIndex < this@permutations.size) {
+                    mainIndices.swap(edgeIndex, nextLargestIndex)
+                } else {
+                    mainIndices.reverseRightOf(edgeIndex + 1)
+                    // edgeIndex = (k - 1) - 1
+                    edgeIndex--
+                    while (edgeIndex >= 0 && mainIndices[edgeIndex] >= mainIndices[edgeIndex + 1]) {
+                        edgeIndex--
+                    }
+                    if (edgeIndex < 0) {
+                        hasNext = false
+                        return toReturn
+                    }
+                    // nextLargestIndex = n - 1
+                    nextLargestIndex--
+                    while (nextLargestIndex > edgeIndex && mainIndices[edgeIndex] >= mainIndices[nextLargestIndex]) {
+                        nextLargestIndex--
+                    }
+                    mainIndices.swap(edgeIndex, nextLargestIndex)
+                    mainIndices.reverseRightOf(edgeIndex + 1)
+                }
+
+                return toReturn
+            }
+        }.asSequence()
+    }
+}
+
+private fun <E> MutableList<E>.reverseRightOf(fromIndex: Int) {
+    this.subList(fromIndex, this.size).reverse()
+}
+
+private fun <E> MutableList<E>.swap(index1: Int, index2: Int) {
+    val temp = this[index1]
+    this[index1] = this[index2]
+    this[index2] = temp
 }
 
 data class SortedPair<T : Comparable<T>>(var larger: T, var smaller: T) {

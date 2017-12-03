@@ -16,9 +16,11 @@ object Problem2 {
         val grid = input.asSequence().map { it.split('\t').map { it.toInt() } }.toList()
 
         val checksum = grid.map { row ->
-            val divisible = row.combinations(2).map { it.toSortedPair() }.first {
-                return@first it.larger % it.smaller == 0
-            }
+            val divisible = row.combinations(2)
+                    .map { it.toSortedPair() }
+                    .first {
+                        return@first it.larger % it.smaller == 0
+                    }
             return@map divisible.larger / divisible.smaller
         }.sum()
 
