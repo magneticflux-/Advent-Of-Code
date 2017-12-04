@@ -1,7 +1,8 @@
 package com.github.magneticflux.aoc.day3
 
-import com.github.magneticflux.aoc.day3.Problem1.Direction.*
+import com.github.magneticflux.aoc.IntPoint
 import com.github.magneticflux.aoc.input
+import com.github.magneticflux.aoc.spiralSequenceOf
 import java.util.*
 
 /**
@@ -13,39 +14,17 @@ object Problem2 {
         val input = Scanner(input())
         val location = input.next().toInt()
 
-        val map = mutableMapOf<Pair<Int, Int>, Int>()
-        map[0.to(0)] = 1
+        val map = mutableMapOf(IntPoint(0, 0).to(1))
 
-        var currentLine = 0
-        fun getLineLength() = (currentLine / 2) + 1
-        var currentDirection = RIGHT
-        var x = 0
-        var y = 0
+        val firstLarger = spiralSequenceOf()
+                .drop(1) // Exclude first tile
+                .find {
+                    val value = it.surroundingPoints.map { map.getOrDefault(it, 0) }.sum()
 
-        while (true) {
-            for (i in 1..getLineLength()) {
-                println("x=$x y=$y")
-                when (currentDirection) {
-                    UP -> y++
-                    DOWN -> y--
-                    LEFT -> x--
-                    RIGHT -> x++
+                    map[it] = value
+
+                    return@find value > location
                 }
-                map[x.to(y)] = (map.getOrDefault((x + 1).to(y + 1), 0)
-                        + map.getOrDefault((x + 1).to(y), 0)
-                        + map.getOrDefault((x + 1).to(y - 1), 0)
-                        + map.getOrDefault((x).to(y + 1), 0)
-                        + map.getOrDefault((x).to(y - 1), 0)
-                        + map.getOrDefault((x - 1).to(y + 1), 0)
-                        + map.getOrDefault((x - 1).to(y), 0)
-                        + map.getOrDefault((x - 1).to(y - 1), 0))
-                if (map[x.to(y)]!! > location) {
-                    println("value: ${map[x.to(y)]}")
-                    return
-                }
-            }
-            currentDirection = currentDirection.next
-            currentLine++
-        }
+        println("First larger than $location at $firstLarger = ${map[firstLarger]}")
     }
 }
