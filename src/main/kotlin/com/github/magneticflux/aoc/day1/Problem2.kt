@@ -3,9 +3,6 @@ package com.github.magneticflux.aoc.day1
 import com.github.magneticflux.aoc.input
 import java.util.*
 
-/**
- * Created by Mitchell Skaggs on 12/1/2017.
- */
 object Problem2 {
     @JvmStatic
     fun main(args: Array<String>) {
