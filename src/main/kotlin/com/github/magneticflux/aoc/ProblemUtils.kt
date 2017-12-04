@@ -1,6 +1,7 @@
 package com.github.magneticflux.aoc
 
 import com.github.magneticflux.aoc.Direction.*
+import com.github.magneticflux.geom.IntPoint2D
 import java.io.InputStream
 import kotlin.reflect.KMutableProperty0
 
@@ -143,17 +144,17 @@ fun <R> KMutableProperty0<R>.swapWith(other: KMutableProperty0<R>) {
 /**
  * @param[lineLength] a function that returns the *size* of the line (similar to [Collection.size])
  */
-fun spiralSequenceOf(startPoint: IntPoint = IntPoint(0, 0),
+fun spiralSequenceOf(startPoint: IntPoint2D = IntPoint2D(0, 0),
                      startDirection: Direction = RIGHT,
                      lineLength: SpiralIterator.() -> Int = { (currentLine / 2) + 2 },
-                     rotation: SpiralIterator.() -> Direction = { Rotation.CCW.next(currentDirection) }): Sequence<IntPoint> {
+                     rotation: SpiralIterator.() -> Direction = { Rotation.CCW.next(currentDirection) }): Sequence<IntPoint2D> {
     return SpiralIterator(startPoint, startDirection, lineLength, rotation).asSequence()
 }
 
-class SpiralIterator internal constructor(startPoint: IntPoint,
+class SpiralIterator internal constructor(startPoint: IntPoint2D,
                                           startDirection: Direction,
                                           private val lineLength: SpiralIterator.() -> Int,
-                                          private val rotation: SpiralIterator.() -> Direction) : Iterator<IntPoint> {
+                                          private val rotation: SpiralIterator.() -> Direction) : Iterator<IntPoint2D> {
     var currentPoint = startPoint
     var currentDirection = startDirection
     var currentStep = 0
@@ -162,7 +163,7 @@ class SpiralIterator internal constructor(startPoint: IntPoint,
 
     override fun hasNext(): Boolean = true
 
-    override fun next(): IntPoint {
+    override fun next(): IntPoint2D {
         val toReturn = currentPoint
 
         advancePoint()
@@ -218,43 +219,10 @@ enum class Rotation(val next: (Direction) -> Direction) {
     })
 }
 
-data class IntPoint(val x: Int, val y: Int) {
-    val adjacentPoints by lazy {
-        arrayOf(
-                this.copy(x = x + 1),
-                this.copy(x = x - 1),
-                this.copy(y = y + 1),
-                this.copy(y = y - 1)
-        )
-    }
-
-    val diagonalPoints by lazy {
-        arrayOf(
-                this.copy(x = x + 1, y = y + 1),
-                this.copy(x = x + 1, y = y - 1),
-                this.copy(x = x - 1, y = y + 1),
-                this.copy(x = x - 1, y = y - 1)
-        )
-    }
-
-    val surroundingPoints by lazy {
-        adjacentPoints + diagonalPoints
-    }
-
-    fun move(direction: Direction): IntPoint {
-        return when (direction) {
-            UP -> copy(y = y + 1)
-            DOWN -> copy(y = y - 1)
-            LEFT -> copy(x = x - 1)
-            RIGHT -> copy(x = x + 1)
-        }
-    }
-}
-
 fun main(args: Array<String>) {
     val size = 11
     val grid = Array(size, { Array(size, { 0 }) })
-    spiralSequenceOf(startPoint = IntPoint(size / 2, size / 2))
+    spiralSequenceOf(startPoint = IntPoint2D(size / 2, size / 2))
             .take(121)
             .forEachIndexed { index, point ->
                 grid[point.y][point.x] = index + 1

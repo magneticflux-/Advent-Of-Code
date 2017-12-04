@@ -1,8 +1,8 @@
 package com.github.magneticflux.aoc.day3
 
-import com.github.magneticflux.aoc.IntPoint
 import com.github.magneticflux.aoc.input
 import com.github.magneticflux.aoc.spiralSequenceOf
+import com.github.magneticflux.geom.IntPoint2D
 import java.util.*
 
 /**
@@ -14,12 +14,12 @@ object Problem2 {
         val input = Scanner(input())
         val location = input.next().toInt()
 
-        val map = mutableMapOf(IntPoint(0, 0).to(1))
+        val map = mutableMapOf(IntPoint2D(0, 0).to(1))
 
         val firstLarger = spiralSequenceOf()
                 .drop(1) // Exclude first tile
                 .find {
-                    val value = it.surroundingPoints.map { map.getOrDefault(it, 0) }.sum()
+                    val value = it.surroundingPoints.map { map[it] ?: 0 }.sum()
 
                     map[it] = value
 
