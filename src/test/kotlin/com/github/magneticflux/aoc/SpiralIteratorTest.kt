@@ -1,6 +1,7 @@
 package com.github.magneticflux.aoc
 
 import com.github.magneticflux.aoc.geom.IntPoint2D
+import com.github.magneticflux.aoc.geom.Point2D
 import com.google.common.math.IntMath
 import com.natpryce.hamkrest.assertion.assert
 import com.natpryce.hamkrest.equalTo
@@ -19,19 +20,19 @@ object SpiralSequenceTest : Spek({
             val spiral = spiralSequenceOf().iterator()
 
             it("should have the first element at (0, 0)") {
-                assert.that(spiral.next(), equalTo(IntPoint2D(0, 0)))
+                assert.that<Point2D<Int>>(spiral.next(), equalTo(IntPoint2D(0, 0)))
             }
 
             it("should have the second element at (1, 0)") {
-                assert.that(spiral.next(), equalTo(IntPoint2D(1, 0)))
+                assert.that<Point2D<Int>>(spiral.next(), equalTo(IntPoint2D(1, 0)))
             }
 
             it("should have the third element at (1, 1)") {
-                assert.that(spiral.next(), equalTo(IntPoint2D(1, 1)))
+                assert.that<Point2D<Int>>(spiral.next(), equalTo(IntPoint2D(1, 1)))
             }
 
             it("should have the fourth element at (0, 1)") {
-                assert.that(spiral.next(), equalTo(IntPoint2D(0, 1)))
+                assert.that<Point2D<Int>>(spiral.next(), equalTo(IntPoint2D(0, 1)))
             }
         }
         on("large spiral iterated over") {

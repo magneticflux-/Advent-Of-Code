@@ -14,6 +14,6 @@ object Problem1 {
                 .take(location)
                 .last()
 
-        println("Point= $point, Manhattan distance= ${point.manhattanDistance}")
+        println("Point= $point, Manhattan distance= ${point.toVector().manhattanDistance}")
     }
 }

@@ -1,15 +1,7 @@
-@file:Suppress("USELESS_CAST")
+@file:Suppress("UNCHECKED_CAST")
 
 package com.github.magneticflux.aoc.geom
 
-import sun.management.snmp.jvminstr.JvmThreadInstanceEntryImpl.ThreadStateMap.Byte1.other
-
-/**
- * Created by Mitchell Skaggs on 12/3/2017.
- */
-
-
-@Suppress("UNCHECKED_CAST")
 operator fun <T : Number> T.plus(other: T): T {
     return when {
         this is Byte -> (this as Byte + other as Byte).toByte() as T
@@ -18,12 +10,23 @@ operator fun <T : Number> T.plus(other: T): T {
         this is Long -> (this as Long + other as Long) as T
         this is Float -> (this as Float + other as Float) as T
         this is Double -> (this as Double + other as Double) as T
-        else -> throw ArithmeticException("Unsupported number type: $this + $other")
+        else -> throw ArithmeticException("Unsupported number type: ${this::class} + ${other::class}")
     }
 }
 
-@Suppress("UNCHECKED_CAST")
-operator fun <T> Number.times(other: T): T {
+operator fun <T : Number> T.minus(other: T): T {
+    return when {
+        this is Byte -> (this as Byte - other as Byte).toByte() as T
+        this is Short -> (this as Short - other as Short).toShort() as T
+        this is Int -> (this as Int - other as Int) as T
+        this is Long -> (this as Long - other as Long) as T
+        this is Float -> (this as Float - other as Float) as T
+        this is Double -> (this as Double - other as Double) as T
+        else -> throw ArithmeticException("Unsupported number type: ${this::class} + ${other::class}")
+    }
+}
+
+operator fun <T : Number> T.times(other: T): T {
     return when {
         this is Byte -> (this as Byte * other as Byte).toByte() as T
         this is Short -> (this as Short * other as Short).toShort() as T
@@ -31,7 +34,19 @@ operator fun <T> Number.times(other: T): T {
         this is Long -> (this as Long * other as Long) as T
         this is Float -> (this as Float * other as Float) as T
         this is Double -> (this as Double * other as Double) as T
-        else -> throw ArithmeticException("Unsupported number type: $this + $other")
+        else -> throw ArithmeticException("Unsupported number type: ${this::class} + ${other::class}")
+    }
+}
+
+operator fun <T : Number> T.div(other: T): T {
+    return when {
+        this is Byte -> (this as Byte / other as Byte).toByte() as T
+        this is Short -> (this as Short / other as Short).toShort() as T
+        this is Int -> (this as Int / other as Int) as T
+        this is Long -> (this as Long / other as Long) as T
+        this is Float -> (this as Float / other as Float) as T
+        this is Double -> (this as Double / other as Double) as T
+        else -> throw ArithmeticException("Unsupported number type: ${this::class} + ${other::class}")
     }
 }
 
@@ -43,7 +58,7 @@ operator fun <T : Number> T.compareTo(other: T): Int {
         this is Long -> (this as Long).compareTo(other as Long)
         this is Float -> (this as Float).compareTo(other as Float)
         this is Double -> (this as Double).compareTo(other as Double)
-        else -> throw ArithmeticException("Unsupported number type: $this + $other")
+        else -> throw ArithmeticException("Unsupported number type: ${this::class} + ${other::class}")
     }
 }
 
@@ -53,8 +68,7 @@ fun <T : Number> T.absoluteValue(): T {
 
 val Number.absoluteValue get() = this.absoluteValue()
 
-@Suppress("UNCHECKED_CAST")
-private operator fun <T : Number> T.unaryMinus(): T {
+operator fun <T : Number> T.unaryMinus(): T {
     return when {
         this is Byte -> this.unaryMinus() as T
         this is Short -> this.unaryMinus() as T
@@ -62,6 +76,6 @@ private operator fun <T : Number> T.unaryMinus(): T {
         this is Long -> this.unaryMinus() as T
         this is Float -> this.unaryMinus() as T
         this is Double -> this.unaryMinus() as T
-        else -> throw ArithmeticException("Unsupported number type: $this + $other")
+        else -> throw ArithmeticException("Unsupported number type: ${this::class}")
     }
 }

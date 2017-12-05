@@ -2,6 +2,8 @@ package com.github.magneticflux.aoc
 
 import com.github.magneticflux.aoc.Direction.*
 import com.github.magneticflux.aoc.geom.IntPoint2D
+import com.github.magneticflux.aoc.geom.IntVector2D
+import com.github.magneticflux.aoc.geom.Point2D
 import java.util.*
 import kotlin.reflect.KMutableProperty0
 
@@ -152,18 +154,18 @@ fun <R> KMutableProperty0<R>.swapWith(other: KMutableProperty0<R>) {
 /**
  * @param[lineLength] a function that returns the *size* of the line (similar to [Collection.size])
  */
-fun spiralSequenceOf(startPoint: IntPoint2D = IntPoint2D(0, 0),
+fun spiralSequenceOf(startPoint: Point2D<Int> = IntPoint2D(0, 0),
                      startDirection: Direction = RIGHT,
                      lineLength: SpiralIterator.() -> Int = { (currentLine / 2) + 2 },
                      rotation: SpiralIterator.() -> Direction = { Rotation.CCW.next(currentDirection) }): Sequence<IntPoint2D> {
     return SpiralIterator(startPoint, startDirection, lineLength, rotation).asSequence()
 }
 
-class SpiralIterator internal constructor(startPoint: IntPoint2D,
+class SpiralIterator internal constructor(startPoint: Point2D<Int>,
                                           startDirection: Direction,
                                           private val lineLength: SpiralIterator.() -> Int,
                                           private val rotation: SpiralIterator.() -> Direction) : Iterator<IntPoint2D> {
-    var currentPoint = startPoint
+    var currentPoint = startPoint.toIntPoint()
     var currentDirection = startDirection
     var currentStep = 0
     var currentLine = 0
@@ -190,7 +192,7 @@ class SpiralIterator internal constructor(startPoint: IntPoint2D,
         currentStep++
         currentIndexInLine++
 
-        currentPoint = currentPoint.move(currentDirection)
+        currentPoint += currentDirection.vector
     }
 
     private fun advanceLine() {
@@ -204,8 +206,11 @@ class SpiralIterator internal constructor(startPoint: IntPoint2D,
     }
 }
 
-enum class Direction {
-    UP, DOWN, LEFT, RIGHT
+enum class Direction(val vector: IntVector2D) {
+    UP(IntVector2D(0, 1)),
+    DOWN(IntVector2D(0, -1)),
+    LEFT(IntVector2D(-1, 0)),
+    RIGHT(IntVector2D(1, 0));
 }
 
 enum class Rotation(val next: (Direction) -> Direction) {
