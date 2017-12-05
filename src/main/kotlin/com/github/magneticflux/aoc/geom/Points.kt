@@ -1,4 +1,4 @@
-package com.github.magneticflux.geom
+package com.github.magneticflux.aoc.geom
 
 import com.github.magneticflux.aoc.Direction
 

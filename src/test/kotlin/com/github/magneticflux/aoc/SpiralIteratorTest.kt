@@ -1,6 +1,6 @@
 package com.github.magneticflux.aoc
 
-import com.github.magneticflux.geom.IntPoint2D
+import com.github.magneticflux.aoc.geom.IntPoint2D
 import com.google.common.math.IntMath
 import com.natpryce.hamkrest.assertion.assert
 import com.natpryce.hamkrest.equalTo
@@ -40,13 +40,13 @@ object SpiralSequenceTest : Spek({
             spiral.take(10000).forEachIndexed { index, point ->
                 val tileNumber = index + 1
                 if (tileNumber.isOdd() && tileNumber.isSquare()) {
-                    it("odd, square number '$tileNumber' (at index $index) should be on the down-right diagonal") {
+                    it("should have an odd, square number '$tileNumber' (at index $index)on the down-right diagonal") {
                         assert.that(point.x, equalTo(-point.y))
                     }
                 }
 
                 if (index.isEven() && index.isSquare()) {
-                    it("odd, square number '$tileNumber' (at index $index) should be on the up-left diagonal") {
+                    it("should have an odd, square-plus-one number '$tileNumber' (at index $index) on the up-left diagonal") {
                         assert.that(point.x, equalTo(-point.y))
                     }
                 }

@@ -1,4 +1,4 @@
-package com.github.magneticflux.geom
+package com.github.magneticflux.aoc.geom
 
 import com.google.common.math.IntMath
 import org.apache.commons.math3.util.FastMath

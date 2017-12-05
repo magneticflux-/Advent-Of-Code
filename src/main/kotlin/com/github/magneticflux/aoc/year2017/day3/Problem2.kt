@@ -1,9 +1,9 @@
 package com.github.magneticflux.aoc.year2017.day3
 
+import com.github.magneticflux.aoc.geom.IntPoint2D
 import com.github.magneticflux.aoc.input
 import com.github.magneticflux.aoc.lines
 import com.github.magneticflux.aoc.spiralSequenceOf
-import com.github.magneticflux.geom.IntPoint2D
 
 object Problem2 {
     @JvmStatic

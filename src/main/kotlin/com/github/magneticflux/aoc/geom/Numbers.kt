@@ -1,6 +1,6 @@
 @file:Suppress("USELESS_CAST")
 
-package com.github.magneticflux.geom
+package com.github.magneticflux.aoc.geom
 
 import sun.management.snmp.jvminstr.JvmThreadInstanceEntryImpl.ThreadStateMap.Byte1.other
 

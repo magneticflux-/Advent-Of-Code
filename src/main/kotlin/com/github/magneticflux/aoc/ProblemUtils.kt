@@ -1,7 +1,7 @@
 package com.github.magneticflux.aoc
 
 import com.github.magneticflux.aoc.Direction.*
-import com.github.magneticflux.geom.IntPoint2D
+import com.github.magneticflux.aoc.geom.IntPoint2D
 import java.util.*
 import kotlin.reflect.KMutableProperty0
 
