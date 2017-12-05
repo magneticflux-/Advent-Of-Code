@@ -1,20 +1,19 @@
-package com.github.magneticflux.aoc.day4
+package com.github.magneticflux.aoc.year2017.day4
 
 import com.github.magneticflux.aoc.input
-import java.util.*
+import com.github.magneticflux.aoc.lines
 
 object Problem1 {
     @JvmStatic
     fun main(args: Array<String>) {
-        val input = Scanner(input())
-        input.useDelimiter("\n")
+        val input = input().lines()
 
-        val count = input.iterator().asSequence().filter {
+        val count = input.asSequence().filter {
             val list = it.split(" ")
             val set = list.toSet()
             set.size == list.size
         }.count()
 
-        println("Count= $count")
+        println("Count=$count")
     }
 }

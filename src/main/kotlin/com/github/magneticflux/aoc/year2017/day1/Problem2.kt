@@ -1,12 +1,12 @@
-package com.github.magneticflux.aoc.day1
+package com.github.magneticflux.aoc.year2017.day1
 
 import com.github.magneticflux.aoc.input
-import java.util.*
+import com.github.magneticflux.aoc.lines
 
 object Problem2 {
     @JvmStatic
     fun main(args: Array<String>) {
-        val lineChars = Scanner(input()).nextLine().toCharArray()
+        val lineChars = input().lines().next().toCharArray()
 
         var count = 0
 

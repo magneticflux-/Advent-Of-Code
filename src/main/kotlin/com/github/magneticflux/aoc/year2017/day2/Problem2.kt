@@ -1,15 +1,15 @@
-package com.github.magneticflux.aoc.day2
+package com.github.magneticflux.aoc.year2017.day2
 
 import com.github.magneticflux.aoc.combinations
 import com.github.magneticflux.aoc.input
+import com.github.magneticflux.aoc.lines
 import com.github.magneticflux.aoc.toSortedPair
-import java.util.*
 
 object Problem2 {
     @JvmStatic
     fun main(args: Array<String>) {
-        val input = Scanner(input())
-        input.useDelimiter("\n")
+        val input = input().lines()
+
         val grid = input.asSequence().map { it.split('\t').map { it.toInt() } }.toList()
 
         val checksum = grid.map { row ->

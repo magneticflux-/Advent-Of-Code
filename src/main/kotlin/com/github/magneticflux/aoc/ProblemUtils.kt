@@ -2,15 +2,23 @@ package com.github.magneticflux.aoc
 
 import com.github.magneticflux.aoc.Direction.*
 import com.github.magneticflux.geom.IntPoint2D
-import java.io.InputStream
+import java.util.*
 import kotlin.reflect.KMutableProperty0
 
-fun Any.input(): InputStream {
-    return this::class.java.getResourceAsStream("input.txt")
+fun Any.input(): Scanner {
+    return Scanner(this::class.java.getResourceAsStream("input.txt"))
 }
 
-fun Any.example(index: Int? = null): InputStream {
-    return this::class.java.getResourceAsStream("example${index?.toString() ?: ""}.txt")
+fun Any.example(index: Int? = null): Scanner {
+    return Scanner(this::class.java.getResourceAsStream("example${index?.toString() ?: ""}.txt"))
+}
+
+fun Scanner.lines(): Iterator<String> {
+    return object : Iterator<String> {
+        override fun hasNext(): Boolean = this@lines.hasNextLine()
+
+        override fun next(): String = this@lines.nextLine()
+    }
 }
 
 /**
