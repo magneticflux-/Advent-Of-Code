@@ -8,7 +8,18 @@ object Problem2 {
     @JvmStatic
     fun main(args: Array<String>) {
         val input = input().lines()
-        val lengths = input.next().map { it.toInt() }.toList() + listOf(17, 31, 73, 47, 23)
+
+        val hash = denseHash(input.next().asIterable())
+                .joinToString(separator = "") {
+                    it.toString(16)
+                            .padStart(2, '0')
+                }
+
+        println(hash)
+    }
+
+    fun denseHash(chars: Iterable<Char>): List<Int> {
+        val lengths = chars.map { it.toInt() }.toList() + listOf(17, 31, 73, 47, 23)
 
         var currentPosition = 0
         var skipSize = 0
@@ -27,11 +38,6 @@ object Problem2 {
                 .chunked(16) {
                     it.reduce { acc, i -> acc xor i }
                 }
-                .joinToString(separator = "") {
-                    it.toString(16)
-                            .padStart(2, '0')
-                }
-
-        println(denseHash)
+        return denseHash
     }
 }
