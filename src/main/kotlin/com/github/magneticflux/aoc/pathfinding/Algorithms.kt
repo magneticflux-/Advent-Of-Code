@@ -8,10 +8,12 @@ import com.google.common.graph.ValueGraphBuilder
  * Created by Mitchell Skaggs on 12/7/2017.
  */
 
-fun <Node : Any> SuccessorsFunction<Node>.aStar(start: Node,
-                                                goal: Node,
-                                                exactCost: (from: Node, neighbor: Node) -> Double,
-                                                heuristic: (from: Node, to: Node) -> Double): PathfindResult<Node> {
+fun <Node : Any> SuccessorsFunction<Node>.aStar(
+        start: Node,
+        goal: Node,
+        exactCost: (from: Node, neighbor: Node) -> Double,
+        heuristic: (from: Node, to: Node) -> Double
+): PathfindResult<Node> {
     val openSet = mutableSetOf(start)
 
     val cameFrom = mutableMapOf<Node, Node>()
@@ -66,6 +68,16 @@ object NoPathFound : PathfindResult<Any>() {
 }
 
 fun main(args: Array<String>) {
+    /*
+    Graph:
+      s
+     / \
+    |   a
+    c   |
+    |   b
+     \ /
+      g
+     */
     val graph = ValueGraphBuilder.undirected().allowsSelfLoops(true).build<String, Double>()
             .apply {
                 addNode("s")
@@ -87,6 +99,9 @@ fun main(args: Array<String>) {
             .let { println(it) }
 }
 
-fun <Node, EdgeValue> ValueGraph<Node, EdgeValue>.getEdgeValue(nodeU: Node, nodeV: Node): EdgeValue {
+fun <Node, EdgeValue> ValueGraph<Node, EdgeValue>.getEdgeValue(
+        nodeU: Node,
+        nodeV: Node
+): EdgeValue {
     return this.edgeValue(nodeU, nodeV).get()
 }

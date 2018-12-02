@@ -1,7 +1,6 @@
 package com.github.magneticflux.aoc.year2017.day3
 
 import com.github.magneticflux.aoc.geom.IntPoint2D
-import com.github.magneticflux.aoc.geom.Point2D
 import com.github.magneticflux.aoc.input
 import com.github.magneticflux.aoc.lines
 import com.github.magneticflux.aoc.spiralSequenceOf
@@ -27,7 +26,7 @@ object Problem2 {
     }
 }
 
-private val Point2D<Int>.surroundingPoints
+private val IntPoint2D.surroundingPoints
     get() = arrayOf(
             copy(x = x + 1, y = y),
             copy(x = x - 1, y = y),
