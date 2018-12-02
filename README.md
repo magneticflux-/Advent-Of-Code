@@ -1,3 +1,3 @@
-# Advent of Code 2017
+# Advent of Code
 
-Copyright 2017 Mitchell Skaggs
+Copyright 2018 Mitchell Skaggs
