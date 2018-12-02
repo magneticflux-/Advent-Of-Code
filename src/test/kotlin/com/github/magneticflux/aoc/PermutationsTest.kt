@@ -4,19 +4,17 @@ import com.natpryce.hamkrest.assertion.assert
 import com.natpryce.hamkrest.equalTo
 import com.natpryce.hamkrest.hasSize
 import com.natpryce.hamkrest.isEmpty
-import org.jetbrains.spek.api.Spek
-import org.jetbrains.spek.api.dsl.given
-import org.jetbrains.spek.api.dsl.it
-import org.jetbrains.spek.api.dsl.on
+import org.spekframework.spek2.Spek
+import org.spekframework.spek2.style.specification.describe
 
 /**
- * Created by Mitchell Skaggs on 12/2/2017.
+ * Created by Mitchell Skaggs context 12/2/2017.
  */
 object PermutationsTest : Spek({
-    given("a list of size 2") {
+    describe("a list of size 2") {
         val list = listOf("One", "Two")
 
-        on("permutations with k = 0") {
+        context("permutations with k = 0") {
             val permutations = list.permutations(0).toList()
 
             it("should return 1 item") {
@@ -28,7 +26,7 @@ object PermutationsTest : Spek({
             }
         }
 
-        on("permutations with k = 1") {
+        context("permutations with k = 1") {
             val permutations = list.permutations(1).toList()
 
             it("should return 2 items") {
@@ -44,7 +42,7 @@ object PermutationsTest : Spek({
             }
         }
 
-        on("permutations with k = 2") {
+        context("permutations with k = 2") {
             val permutations = list.permutations(2).toList()
 
             it("should return 2 items") {
@@ -60,7 +58,7 @@ object PermutationsTest : Spek({
             }
         }
 
-        on("permutations with k = 3") {
+        context("permutations with k = 3") {
             val permutations = list.permutations(3).toList()
 
             it("should return 0 items") {
@@ -68,10 +66,10 @@ object PermutationsTest : Spek({
             }
         }
     }
-    given("a list of size 4") {
+    describe("a list of size 4") {
         val list = listOf("One", "Two", "Three", "Four")
 
-        on("permutations with k = 0") {
+        context("permutations with k = 0") {
             val permutations = list.permutations(0).toList()
 
             it("should return 1 item") {
@@ -83,7 +81,7 @@ object PermutationsTest : Spek({
             }
         }
 
-        on("permutations with k = 1") {
+        context("permutations with k = 1") {
             val permutations = list.permutations(1).toList()
 
             it("should return 4 items") {
@@ -107,7 +105,7 @@ object PermutationsTest : Spek({
             }
         }
 
-        on("permutations with k = 2") {
+        context("permutations with k = 2") {
             val permutations = list.permutations(2).toList()
 
             it("should return 12 items") {
@@ -115,7 +113,7 @@ object PermutationsTest : Spek({
             }
         }
 
-        on("permutations with k = 4") {
+        context("permutations with k = 4") {
             val permutations = list.permutations(4).toList()
 
             it("should return 24 items") {

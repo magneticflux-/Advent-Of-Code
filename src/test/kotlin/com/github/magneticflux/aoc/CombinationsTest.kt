@@ -4,19 +4,17 @@ import com.natpryce.hamkrest.assertion.assert
 import com.natpryce.hamkrest.equalTo
 import com.natpryce.hamkrest.hasSize
 import com.natpryce.hamkrest.isEmpty
-import org.jetbrains.spek.api.Spek
-import org.jetbrains.spek.api.dsl.given
-import org.jetbrains.spek.api.dsl.it
-import org.jetbrains.spek.api.dsl.on
+import org.spekframework.spek2.Spek
+import org.spekframework.spek2.style.specification.describe
 
 /**
- * Created by Mitchell Skaggs on 12/2/2017.
+ * Created by Mitchell Skaggs context 12/2/2017.
  */
 object CombinationsTest : Spek({
-    given("a list of size 2") {
+    describe("a list of size 2") {
         val list = listOf("One", "Two")
 
-        on("combinations with k = 0") {
+        context("combinations with k = 0") {
             val combinations = list.combinations(0).toList()
 
             it("should return one item") {
@@ -28,7 +26,7 @@ object CombinationsTest : Spek({
             }
         }
 
-        on("combinations with k = 1") {
+        context("combinations with k = 1") {
             val combinations = list.combinations(1).toList()
 
             it("should return two items") {
@@ -44,7 +42,7 @@ object CombinationsTest : Spek({
             }
         }
 
-        on("combinations with k = 2") {
+        context("combinations with k = 2") {
             val combinations = list.combinations(2).toList()
 
             it("should return one item") {
@@ -56,7 +54,7 @@ object CombinationsTest : Spek({
             }
         }
 
-        on("combinations with k = 3") {
+        context("combinations with k = 3") {
             val combinations = list.combinations(3).toList()
 
             it("should return zero items") {

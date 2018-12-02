@@ -5,18 +5,16 @@ import com.github.magneticflux.aoc.geom.Point2D
 import com.google.common.math.IntMath
 import com.natpryce.hamkrest.assertion.assert
 import com.natpryce.hamkrest.equalTo
-import org.jetbrains.spek.api.Spek
-import org.jetbrains.spek.api.dsl.given
-import org.jetbrains.spek.api.dsl.it
-import org.jetbrains.spek.api.dsl.on
+import org.spekframework.spek2.Spek
+import org.spekframework.spek2.style.specification.describe
 import java.math.RoundingMode
 
 /**
  * Created by Mitchell Skaggs on 12/3/2017.
  */
 object SpiralSequenceTest : Spek({
-    given("default settings") {
-        on("initial spiral iterated over") {
+    describe("default settings") {
+        context("initial spiral iterated over") {
             val spiral = spiralSequenceOf().iterator()
 
             it("should have the first element at (0, 0)") {
@@ -35,7 +33,7 @@ object SpiralSequenceTest : Spek({
                 assert.that<Point2D<Int>>(spiral.next(), equalTo(IntPoint2D(0, 1)))
             }
         }
-        on("large spiral iterated over") {
+        context("large spiral iterated over") {
             val spiral = spiralSequenceOf()
 
             spiral.take(10000).forEachIndexed { index, point ->
