@@ -1,6 +1,6 @@
 package com.github.magneticflux.aoc.year2018.day1
 
-import com.github.magneticflux.aoc.InputHelpers._
+import com.github.magneticflux.aoc.Helpers._
 
 import scala.collection.mutable
 import scala.util.control.Breaks._

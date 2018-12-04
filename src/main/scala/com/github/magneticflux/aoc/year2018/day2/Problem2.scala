@@ -1,6 +1,6 @@
 package com.github.magneticflux.aoc.year2018.day2
 
-import com.github.magneticflux.aoc.InputHelpers._
+import com.github.magneticflux.aoc.Helpers._
 
 /**
   * Created by Mitchell Skaggs on 12/2/2018.
