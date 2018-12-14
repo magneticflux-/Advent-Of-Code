@@ -11,7 +11,7 @@ object Helpers {
   implicit class AnyHasInput(any: Any) {
     def input(): BufferedSource = Source.fromInputStream(any.getClass.getResourceAsStream("input.txt"))
 
-    def ex(): BufferedSource = Source.fromInputStream(any.getClass.getResourceAsStream("example.txt"))
+    def example(): BufferedSource = Source.fromInputStream(any.getClass.getResourceAsStream("example.txt"))
   }
 
   implicit class MyRegex(sc: StringContext) {
